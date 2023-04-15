@@ -4,7 +4,7 @@ LinesOfLang - also called LoL - is a command line application that tells you the
 ## Usage
 The default argument ```-e``` or ```--extensions``` gives you the languages shown inside the [langs.toml](./src/langs.toml). If you don't see your language please add it to the [langs.toml](./src/langs.toml) in order to use the default value of extensions. If you execute the following command path argument will take the current working directory as its value:
 ```
-python LoL.py
+python lines_of_langs.py
 ```
 This will generate the following output:
 ```
@@ -15,7 +15,7 @@ C:\repos\LoL\src               96  ['Python']         ['.py']
 
 If you want to search inside a folder other than your current working directory then feel free to use the ```-p``` or ```--path``` argument:
 ```
-python LoL.py -p C:\repos\TomlForge
+python lines_of_langs.py -p C:\repos\TomlForge
 ```
 This will produce the following output:
 ```
@@ -26,7 +26,7 @@ C:\repos\TomlForge\               26  ['PowerShell']     ['.ps1']
 
 If there is there is a specific file extension you are searching for just use the ```-e``` or ```--extensions``` argument:
 ```
-python LoL.py -p C:\repos\TomlForge -e ps1
+python lines_of_langs.py -p C:\repos\TomlForge -e ps1
 ```
 ```
 path                   lines of code  found languages    found extensions
