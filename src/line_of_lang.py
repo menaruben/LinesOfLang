@@ -10,8 +10,8 @@ try:
     from toml import load
 except ModuleNotFoundError:
     from subprocess import run, DEVNULL
-    run(["pip", "install", "tabulate"], stdout=DEVNULL, stderr=DEVNULL)
-    run(["pip", "install", "toml"], stdout=DEVNULL, stderr=DEVNULL)
+    run(["pip", "install", "tabulate"], stdout=DEVNULL, stderr=DEVNULL, check=False)
+    run(["pip", "install", "toml"], stdout=DEVNULL, stderr=DEVNULL, check=False)
     from tabulate import tabulate
     from toml import load
 
