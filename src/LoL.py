@@ -13,7 +13,7 @@ def get_default_extensions() -> list:
 
     return default_extensions
 
-parser = ArgumentParser(description="loc.py is used to get the lines of code inside a directory")
+parser = ArgumentParser(description="LoL.py is used to get the lines of code inside a directory")
 
 # add path and languages arguments
 parser.add_argument("-p", "--path",
