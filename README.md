@@ -26,6 +26,9 @@ C:\repos\TomlForge\               26  ['PowerShell']     ['.ps1']
 
 If there is there is a specific file extension you are searching for just use the ```-e``` or ```--extensions``` argument:
 ```
+python LoL.py -p C:\repos\TomlForge -e ps1
+```
+```
 path                   lines of code  found languages    found extensions
 -------------------  ---------------  -----------------  ------------------
 C:\repos\TomlForge\               26  []                 ['ps1']
