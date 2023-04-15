@@ -1,5 +1,7 @@
 from argparse import ArgumentParser, Namespace
 from os import getcwd, walk, path, system
+from sys import exit
+from pathlib import Path
 try:
     from tabulate import tabulate
     from toml import load
@@ -9,12 +11,15 @@ except:
     from tabulate import tabulate
     from toml import load
 
+script_dir = Path( __file__ ).parent.absolute()
+langs_toml = f"{script_dir}\langs.toml"
+
 def get_default_extensions() -> list:
     """
     returns the default extensions from the langs.toml file (must be in the same folder)
     """
     try:
-        with open("langs.toml", encoding="utf-8") as file_path:
+        with open(langs_toml, encoding="utf-8") as file_path:
             data = load(file_path)
 
         default_extensions = []
@@ -110,7 +115,7 @@ class Code:
         adds to found_language
         """
         try:
-            with open("langs.toml", encoding="utf-8") as file_path:
+            with open(langs_toml, encoding="utf-8") as file_path:
                 data = load(file_path)
 
             for lang in data:
