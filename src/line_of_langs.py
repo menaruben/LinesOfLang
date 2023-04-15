@@ -3,19 +3,19 @@ a command line application that tells you the amount of code written in specific
 """
 from argparse import ArgumentParser, Namespace
 from os import getcwd, walk, path, system
-from sys import exit
+import sys
 from pathlib import Path
 try:
     from tabulate import tabulate
     from toml import load
-except:
+except ModuleNotFoundError:
     system("pip install tabulate")
     system("pip install toml")
     from tabulate import tabulate
     from toml import load
 
 script_dir = Path( __file__ ).parent.absolute()
-langs_toml = fr"{script_dir}\langs.toml"
+langs_toml = fr"{script_dir}/langs.toml"
 
 
 def get_default_extensions() -> list:
@@ -34,7 +34,7 @@ def get_default_extensions() -> list:
 
     except Exception as exception_message:
         print(f"There was an error loading langs.toml file: {exception_message}")
-        exit()
+        sys.exit()
 
 
 parser = ArgumentParser(description="LoL.py is used to get the lines of code inside a directory")
@@ -97,7 +97,7 @@ class Code:
 
         except Exception as exception_message:
             print(f"There was an error searching for files: {exception_message}")
-            exit()
+            sys.exit()
 
     def count_lines(self):
         """
@@ -113,7 +113,7 @@ class Code:
 
         except Exception as exception_message:
             print(f"There was an error coutning the number of lines: {exception_message}")
-            exit()
+            sys.exit()
 
     def get_found_languages(self):
         """
@@ -150,7 +150,7 @@ class Code:
 
         except Exception as exception_message:
             print(f"There was an error printing the output to the terminal: {exception_message}")
-            exit()
+            sys.exit()
 
 
 # create Code object
