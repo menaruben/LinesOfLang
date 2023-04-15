@@ -5,6 +5,7 @@ from argparse import ArgumentParser, Namespace
 from os import getcwd, walk, path
 import sys
 from pathlib import Path
+
 try:
     from tabulate import tabulate
     from toml import load
