@@ -148,11 +148,14 @@ class Code:
                 ]
             ]
 
-            print(tabulate(output_msg,
-                                    headers=["path",
-                                            "lines of code",
-                                            "found languages",
-                                            "found extensions"]))
+            print(
+                tabulate(
+                output_msg,
+                headers=["path",
+                        "lines of code",
+                        "found languages",
+                        "found extensions"
+                        ]))
 
         except NameError as exception_message:
             print(f"There was an error printing the output to the terminal: {exception_message}")
