@@ -12,6 +12,9 @@ except:
 
 
 def get_default_extensions() -> list:
+    """
+    returns the default extensions from the langs.toml file (must be in the same folder)
+    """
     with open("langs.toml", encoding="utf-8") as file_path:
         data = load(file_path)
 
@@ -48,7 +51,18 @@ class Code:
         self.found_extensions = []
         self.found_languages = []
 
+    def test_found_extensions(self, extension):
+        """
+        adds the extension given to the found_extensions
+        array if it isn't already inside the array
+        """
+        if extension not in self.found_extensions:
+            self.found_extensions.append(extension)
+
     def get_files(self):
+        """
+        gets all files paths to file with the extensions given
+        """
         for root, _, files in walk(self.path):
             for name in files:
                 for extension in self.extensions:
@@ -56,10 +70,12 @@ class Code:
                         file_path = path.join(root, name)
                         self.files.append(file_path)
 
-                        if extension not in self.found_extensions:
-                            self.found_extensions.append(extension)
+                        self.test_found_extensions(extension)
 
     def count_lines(self):
+        """
+        counts the amount of lines of files array
+        """
         count = 0
         for file_path in self.files:
             with open (file_path,"r", encoding="utf-8", errors="ignore") as file:
@@ -68,6 +84,10 @@ class Code:
         self.num_of_lines = count
 
     def get_found_languages(self):
+        """
+        maps found extensions to found language and
+        adds to found_language
+        """
         with open("langs.toml", encoding="utf-8") as file_path:
             data = load(file_path)
 
@@ -78,6 +98,9 @@ class Code:
                     break
 
     def output(self):
+        """
+        prints the attributes to terminal in a formatted way
+        """
         output_msg = [
             [self.path, self.num_of_lines, self.found_languages , self.found_extensions]
         ]
