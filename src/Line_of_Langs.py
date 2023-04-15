@@ -1,11 +1,19 @@
 from argparse import ArgumentParser, Namespace
-from os import getcwd, walk, path
-from tabulate import tabulate
-from toml import load
+from os import getcwd, walk, path, system
+
+try:
+    from tabulate import tabulate
+    from toml import load
+except:
+    system("pip install tabulate")
+    system("pip install toml")
+    from tabulate import tabulate
+    from toml import load
+
 
 def get_default_extensions() -> list:
-    with open("langs.toml") as f:
-        data = load(f)
+    with open("langs.toml", encoding="utf-8") as file_path:
+        data = load(file_path)
 
     default_extensions = []
     for lang in data:
@@ -28,10 +36,7 @@ parser.add_argument("-e", "--extensions",
                     help="specifies the file extensions that should be searched",
                     default=get_default_extensions())
 
-# store arguments to variables
 args: Namespace = parser.parse_args()
-arg_path = args.path
-arg_extensions = args.extensions
 
 # create code class
 class Code:
@@ -44,7 +49,7 @@ class Code:
         self.found_languages = []
 
     def get_files(self):
-        for root, dirs, files in walk(self.path):
+        for root, _, files in walk(self.path):
             for name in files:
                 for extension in self.extensions:
                     if name.endswith(extension):
@@ -56,16 +61,15 @@ class Code:
 
     def count_lines(self):
         count = 0
-        for file in self.files:
-            with open (file,"r", encoding="utf-8", errors="ignore") as f:
-                count += len(f.readlines())
+        for file_path in self.files:
+            with open (file_path,"r", encoding="utf-8", errors="ignore") as file:
+                count += len(file.readlines())
 
         self.num_of_lines = count
 
     def get_found_languages(self):
-        found_languages = []
-        with open("langs.toml") as f:
-            data = load(f)
+        with open("langs.toml", encoding="utf-8") as file_path:
+            data = load(file_path)
 
         for lang in data:
             for extension in data[lang]["extensions"]:
@@ -85,7 +89,7 @@ class Code:
                                          "found extensions"]))
 
 # create Code object
-code_obj = Code(arg_path, arg_extensions)
+code_obj = Code(args.path, args.extensions)
 
 # get files and lines of code number
 code_obj.get_files()
