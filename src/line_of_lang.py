@@ -2,15 +2,16 @@
 a command line application that tells you the amount of code written in specific languages
 """
 from argparse import ArgumentParser, Namespace
-from os import getcwd, walk, path, system
+from os import getcwd, walk, path
 import sys
 from pathlib import Path
 try:
     from tabulate import tabulate
     from toml import load
 except ModuleNotFoundError:
-    system("pip install tabulate")
-    system("pip install toml")
+    from subprocess import run, DEVNULL
+    run(["pip", "install", "tabulate"], stdout=DEVNULL, stderr=DEVNULL)
+    run(["pip", "install", "toml"], stdout=DEVNULL, stderr=DEVNULL)
     from tabulate import tabulate
     from toml import load
 
