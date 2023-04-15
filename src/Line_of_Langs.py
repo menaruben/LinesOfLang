@@ -1,9 +1,13 @@
 from argparse import ArgumentParser, Namespace
 from os import getcwd, walk, path, system
-system("pip install tabulate")
-system("pip install toml")
-from tabulate import tabulate
-from toml import load
+try:
+    from tabulate import tabulate
+    from toml import load
+except:
+    system("pip install tabulate")
+    system("pip install toml")
+    from tabulate import tabulate
+    from toml import load
 
 def get_default_extensions() -> list:
     """
