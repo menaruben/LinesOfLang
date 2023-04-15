@@ -1,11 +1,11 @@
 from argparse import ArgumentParser, Namespace
 from os import getcwd, walk, path
-import tabulate
-import toml
+from tabulate import tabulate
+from toml import load
 
 def get_default_extensions() -> list:
     with open("langs.toml") as f:
-        data = toml.load(f)
+        data = load(f)
 
     default_extensions = []
     for lang in data:
@@ -65,7 +65,7 @@ class Code:
     def get_found_languages(self):
         found_languages = []
         with open("langs.toml") as f:
-            data = toml.load(f)
+            data = load(f)
 
         for lang in data:
             for extension in data[lang]["extensions"]:
@@ -78,7 +78,7 @@ class Code:
             [self.path, self.num_of_lines, self.found_languages , self.found_extensions]
         ]
 
-        print(tabulate.tabulate(output_msg,
+        print(tabulate(output_msg,
                                 headers=["path",
                                          "lines of code",
                                          "found languages",
