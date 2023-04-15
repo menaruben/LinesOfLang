@@ -75,7 +75,7 @@ class Code:
                 self.found_extensions.append(extension)
 
         except Exception as exception_message:
-            print(f"There was an error testing the found extensions: {e}")
+            print(f"There was an error testing the found extensions: {exception_message}")
 
 
     def get_files(self):
@@ -93,7 +93,7 @@ class Code:
                             self.test_found_extensions(extension)
 
         except Exception as exception_message:
-            print(f"There was an error searching for files: {e}")
+            print(f"There was an error searching for files: {exception_message}")
             exit()
 
 
@@ -110,7 +110,7 @@ class Code:
             self.num_of_lines = count
 
         except Exception as exception_message:
-            print(f"There was an error coutning the number of lines: {e}")
+            print(f"There was an error coutning the number of lines: {exception_message}")
             exit()
 
     def get_found_languages(self):
@@ -129,7 +129,7 @@ class Code:
                         break
 
         except Exception as exception_message:
-            print(f"There was an error mapping the found extensions to found languages: {e}")
+            print(f"There was an error mapping the found extensions to found languages: {exception_message}")
 
 
     def output(self):
@@ -148,7 +148,7 @@ class Code:
                                             "found extensions"]))
 
         except Exception as exception_message:
-            print(f"There was an error printing the output to the terminal: {e}")
+            print(f"There was an error printing the output to the terminal: {exception_message}")
             exit()
 
 # create Code object
