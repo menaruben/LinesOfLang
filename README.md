@@ -1,5 +1,5 @@
 # LinesOfLang - LoL
-LinesOfLang - also called LoL - is a cli tool that tells you the how much lines of code of (a) language(s) you have written inside a specified path (including subfolders). 
+LinesOfLang - also called LoL - is a command line application that tells you the how much lines of code of (a) language(s) you have written inside a specified path (including subfolders).
 
 ## Usage
 The default argument ```-e``` or ```--extensions``` gives you the languages shown inside the [langs.toml](./src/langs.toml). If you don't see your language please add it to the [langs.toml](./src/langs.toml) in order to use the default value of extensions. If you execute the following command path argument will take the current working directory as its value:
