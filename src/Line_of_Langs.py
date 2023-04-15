@@ -13,14 +13,18 @@ def get_default_extensions() -> list:
     """
     returns the default extensions from the langs.toml file (must be in the same folder)
     """
-    with open("langs.toml", encoding="utf-8") as file_path:
-        data = load(file_path)
+    try:
+        with open("langs.toml", encoding="utf-8") as file_path:
+            data = load(file_path)
 
-    default_extensions = []
-    for lang in data:
-        default_extensions.extend(data[lang]["extensions"])
+        default_extensions = []
+        for lang in data:
+            default_extensions.extend(data[lang]["extensions"])
 
-    return default_extensions
+        return default_extensions
+
+    except Exception as e:
+        print(f"There was an error loading langs.toml file")
 
 parser = ArgumentParser(description="LoL.py is used to get the lines of code inside a directory")
 
@@ -57,60 +61,86 @@ class Code:
         adds the extension given to the found_extensions
         array if it isn't already inside the array
         """
-        if extension not in self.found_extensions:
-            self.found_extensions.append(extension)
+        try:
+            if extension not in self.found_extensions:
+                self.found_extensions.append(extension)
+
+        except Exception as e:
+            print(f"There was an error testing the found extensions: {e}")
+
 
     def get_files(self):
         """
         gets all files paths to file with the extensions given
         """
-        for root, _, files in walk(self.path):
-            for name in files:
-                for extension in self.extensions:
-                    if name.endswith(extension):
-                        file_path = path.join(root, name)
-                        self.files.append(file_path)
+        try:
+            for root, _, files in walk(self.path):
+                for name in files:
+                    for extension in self.extensions:
+                        if name.endswith(extension):
+                            file_path = path.join(root, name)
+                            self.files.append(file_path)
 
-                        self.test_found_extensions(extension)
+                            self.test_found_extensions(extension)
+
+        except Exception as e:
+            print(f"There was an error searching for files: {e}")
+            exit()
+
 
     def count_lines(self):
         """
         counts the amount of lines of files array
         """
-        count = 0
-        for file_path in self.files:
-            with open (file_path,"r", encoding="utf-8", errors="ignore") as file:
-                count += len(file.readlines())
+        try:
+            count = 0
+            for file_path in self.files:
+                with open (file_path,"r", encoding="utf-8", errors="ignore") as file:
+                    count += len(file.readlines())
 
-        self.num_of_lines = count
+            self.num_of_lines = count
+
+        except Exception as e:
+            print(f"There was an error coutning the number of lines: {e}")
+            exit()
 
     def get_found_languages(self):
         """
         maps found extensions to found language and
         adds to found_language
         """
-        with open("langs.toml", encoding="utf-8") as file_path:
-            data = load(file_path)
+        try:
+            with open("langs.toml", encoding="utf-8") as file_path:
+                data = load(file_path)
 
-        for lang in data:
-            for extension in data[lang]["extensions"]:
-                if extension in self.found_extensions:
-                    self.found_languages.append(lang)
-                    break
+            for lang in data:
+                for extension in data[lang]["extensions"]:
+                    if extension in self.found_extensions:
+                        self.found_languages.append(lang)
+                        break
+
+        except Exception as e:
+            print(f"There was an error mapping the found extensions to found languages: {e}")
+
 
     def output(self):
         """
         prints the attributes to terminal in a formatted way
         """
-        output_msg = [
-            [self.path, self.num_of_lines, self.found_languages , self.found_extensions]
-        ]
+        try:
+            output_msg = [
+                [self.path, self.num_of_lines, self.found_languages , self.found_extensions]
+            ]
 
-        print(tabulate(output_msg,
-                                headers=["path",
-                                         "lines of code",
-                                         "found languages",
-                                         "found extensions"]))
+            print(tabulate(output_msg,
+                                    headers=["path",
+                                            "lines of code",
+                                            "found languages",
+                                            "found extensions"]))
+
+        except Exception as e:
+            print(f"There was an error printing the output to the terminal: {e}")
+            exit()
 
 # create Code object
 code_obj = Code()
