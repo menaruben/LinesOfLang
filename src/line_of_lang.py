@@ -32,7 +32,7 @@ def get_default_extensions() -> list:
 
         return default_extensions
 
-    except Exception as exception_message:
+    except FileNotFoundError as exception_message:
         print(f"There was an error loading langs.toml file: {exception_message}")
         sys.exit()
 
@@ -78,7 +78,7 @@ class Code:
             if extension not in self.found_extensions:
                 self.found_extensions.append(extension)
 
-        except Exception as exception_message:
+        except ValueError as exception_message:
             print(f"There was an error testing the found extensions: {exception_message}")
 
     def get_files(self):
@@ -95,7 +95,7 @@ class Code:
 
                             self.test_found_extensions(extension)
 
-        except Exception as exception_message:
+        except ValueError as exception_message:
             print(f"There was an error searching for files: {exception_message}")
             sys.exit()
 
@@ -111,7 +111,7 @@ class Code:
 
             self.num_of_lines = count
 
-        except Exception as exception_message:
+        except TypeError as exception_message:
             print(f"There was an error coutning the number of lines: {exception_message}")
             sys.exit()
 
@@ -130,7 +130,7 @@ class Code:
                         self.found_languages.append(lang)
                         break
 
-        except Exception as exception_message:
+        except FileNotFoundError as exception_message:
             print(f"There was an error mapping the found extensions to found languages: {exception_message}")
 
     def output(self):
@@ -148,7 +148,7 @@ class Code:
                                             "found languages",
                                             "found extensions"]))
 
-        except Exception as exception_message:
+        except NameError as exception_message:
             print(f"There was an error printing the output to the terminal: {exception_message}")
             sys.exit()
 
