@@ -1,3 +1,6 @@
+"""
+a command line application that tells you the amount of code written in specific languages
+"""
 from argparse import ArgumentParser, Namespace
 from os import getcwd, walk, path, system
 from sys import exit
@@ -12,7 +15,7 @@ except:
     from toml import load
 
 script_dir = Path( __file__ ).parent.absolute()
-langs_toml = f"{script_dir}\langs.toml"
+langs_toml = fr"{script_dir}\langs.toml"
 
 def get_default_extensions() -> list:
     """
@@ -28,8 +31,9 @@ def get_default_extensions() -> list:
 
         return default_extensions
 
-    except Exception as e:
-        print(f"There was an error loading langs.toml file")
+    except Exception as exception_message:
+        print(f"There was an error loading langs.toml file: {exception_message}")
+        exit()
 
 parser = ArgumentParser(description="LoL.py is used to get the lines of code inside a directory")
 
@@ -70,7 +74,7 @@ class Code:
             if extension not in self.found_extensions:
                 self.found_extensions.append(extension)
 
-        except Exception as e:
+        except Exception as exception_message:
             print(f"There was an error testing the found extensions: {e}")
 
 
@@ -88,7 +92,7 @@ class Code:
 
                             self.test_found_extensions(extension)
 
-        except Exception as e:
+        except Exception as exception_message:
             print(f"There was an error searching for files: {e}")
             exit()
 
@@ -105,7 +109,7 @@ class Code:
 
             self.num_of_lines = count
 
-        except Exception as e:
+        except Exception as exception_message:
             print(f"There was an error coutning the number of lines: {e}")
             exit()
 
@@ -124,7 +128,7 @@ class Code:
                         self.found_languages.append(lang)
                         break
 
-        except Exception as e:
+        except Exception as exception_message:
             print(f"There was an error mapping the found extensions to found languages: {e}")
 
 
@@ -143,7 +147,7 @@ class Code:
                                             "found languages",
                                             "found extensions"]))
 
-        except Exception as e:
+        except Exception as exception_message:
             print(f"There was an error printing the output to the terminal: {e}")
             exit()
 
