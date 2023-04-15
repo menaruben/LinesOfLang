@@ -59,4 +59,4 @@ extensions = [".hs"]
 extensions = [".lua"]
 
 [PowerShell]
-extensions = [".ps1"]
+extensions = [".ps1", ".psm1"]
