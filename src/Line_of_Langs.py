@@ -1,15 +1,9 @@
 from argparse import ArgumentParser, Namespace
 from os import getcwd, walk, path, system
-
-try:
-    from tabulate import tabulate
-    from toml import load
-except:
-    system("pip install tabulate")
-    system("pip install toml")
-    from tabulate import tabulate
-    from toml import load
-
+system("pip install tabulate")
+system("pip install toml")
+from tabulate import tabulate
+from toml import load
 
 def get_default_extensions() -> list:
     """
@@ -43,9 +37,12 @@ args: Namespace = parser.parse_args()
 
 # create code class
 class Code:
-    def __init__(self, path: str, extensions: str) -> None:
-        self.path = path
-        self.extensions = extensions
+    """
+    stores all information about the code inside a specific path
+    """
+    def __init__(self) -> None:
+        self.path = args.path
+        self.extensions = args.extensions
         self.files = []
         self.num_of_lines = 0
         self.found_extensions = []
@@ -112,7 +109,7 @@ class Code:
                                          "found extensions"]))
 
 # create Code object
-code_obj = Code(args.path, args.extensions)
+code_obj = Code()
 
 # get files and lines of code number
 code_obj.get_files()
