@@ -1,0 +1,62 @@
+[JavaScript]
+extensions = [".js", ".mjs"]
+
+[Python]
+extensions = [".py", ".pyc", ".pyd", ".pyo"]
+
+[Java]
+extensions = [".java", ".class"]
+
+[TypeScript]
+extensions = [".ts", ".tsx"]
+
+["C++"]
+extensions = [".cpp", ".cc", ".cxx", ".h", ".hpp", ".hh", ".hxx"]
+
+[PHP]
+extensions = [".php", ".php3", ".php4", ".php5", ".phtml"]
+
+[Shell]
+extensions = [".sh"]
+
+[Go]
+extensions = [".go"]
+
+["C#"]
+extensions = [".cs"]
+
+[Ruby]
+extensions = [".rb"]
+
+[Swift]
+extensions = [".swift"]
+
+[Kotlin]
+extensions = [".kt"]
+
+[Rust]
+extensions = [".rs"]
+
+[Objective-C]
+extensions = [".m", ".h"]
+
+[Scala]
+extensions = [".scala"]
+
+[Perl]
+extensions = [".pl", ".pm", ".t"]
+
+[Dart]
+extensions = [".dart"]
+
+[Elixir]
+extensions = [".ex", ".exs"]
+
+[Haskell]
+extensions = [".hs"]
+
+[Lua]
+extensions = [".lua"]
+
+[PowerShell]
+extensions = [".ps1"]
