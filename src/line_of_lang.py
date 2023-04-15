@@ -141,7 +141,11 @@ class Code:
         """
         try:
             output_msg = [
-                [self.path, self.num_of_lines, self.found_languages , self.found_extensions]
+                [self.path,
+                self.num_of_lines,
+                self.found_languages,
+                self.found_extensions
+                ]
             ]
 
             print(tabulate(output_msg,
