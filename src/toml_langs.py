@@ -1,6 +1,15 @@
+"""
+contains the toml handling for the langs.toml file
+"""
 import sys
-from toml import load
 from pathlib import Path
+
+try:
+    from toml import load
+except ModuleNotFoundError:
+    from subprocess import run, DEVNULL
+    run(["pip", "install", "toml"], stdout=DEVNULL, stderr=DEVNULL, check=False)
+    from toml import load
 
 script_dir = Path( __file__ ).parent.absolute()
 langs_toml = fr"{script_dir}/langs.toml"

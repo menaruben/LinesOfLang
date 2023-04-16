@@ -1,8 +1,7 @@
 """
 a command line application that tells you the amount of code written in specific languages
 """
-from toml_langs import *
-from code_class import *
+from code_class import Code
 
 # create Code object
 code_obj = Code()
