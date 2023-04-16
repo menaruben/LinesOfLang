@@ -69,7 +69,7 @@ found extensions  ['rb', 'rs']
 As you can see he language does not get added to the found languages column. I am currently working on fixing this small issue. In the future you will also be able to load your own [langs.toml](./src/langs.toml) file with ```-l```/```--load``` but for now you'll have to rename the current one and replace it with your own.
 
 #### Format output to table
-The output by default is a horizontally aligned list. In order to format it to a (vertical) table you need to use the ```-t```/```--table```argument.`
+The output by default is a horizontally aligned list. In order to format it to a (vertical) table you need to use the ```-t```/```--table```argument. This is especially useful when you find a lot of languages/extensions. The table makes it more readable.
 ```
 lol -t
 ```
