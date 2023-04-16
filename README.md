@@ -8,7 +8,7 @@ NOTE: It is recommended to add [main.py](./src/main.py) to your path with a shor
 ```
 usage: main.py [-h] [-p path] [-e extensions [extensions ...]] [-r | --recursive | --no-recursive] [-t | --table | --no-table]
 
-LoL.py is used to get the lines of code inside a directory
+used to get the lines of code inside a directory
 
 options:
   -h, --help            show this help message and exit
