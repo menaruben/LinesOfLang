@@ -64,8 +64,6 @@ class Code:
     def __init__(self) -> None:
         self.path = args.path
         self.extensions = args.extensions
-        self.is_table = args.table
-        self.is_recursive = args.recursive
         self.files = []
         self.num_of_lines = 0
         self.found_extensions = []
@@ -114,7 +112,7 @@ class Code:
         """
         this tests wether or not the user wants to get the files recursively
         """
-        if self.is_recursive:
+        if args.recursive:
             self.get_files_recursive()
         else:
             self.get_files_not_recursive()
@@ -205,7 +203,7 @@ class Code:
         """
         checks wether the user wants the output to be printed out as a table
         """
-        if self.is_table:
+        if args.table:
             self.output_v()
         else:
             self.output_h()
