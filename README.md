@@ -2,7 +2,7 @@
 LinesOfLang - also called LoL - is a command line application that tells you the how much lines of code of (a) language(s) you have written inside a specified path (including subfolders).
 
 ## Documentation
-NOTE: It is recommended to add [lines_of_lang.py](./src/lines_of_lang.py) to your path with a short name like "lol". I did thi for the documentation. So please keep that in mind.
+NOTE: It is recommended to add [lines_of_lang.py](./src/lines_of_lang.py) to your path with a short name like "lol". I did this for the documentation. So please keep that in mind.
 
 ### Help
 ```
