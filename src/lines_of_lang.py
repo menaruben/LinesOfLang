@@ -1,8 +1,8 @@
 """
 a command line application that tells you the amount of code written in specific languages
 """
-from argparse import ArgumentParser, Namespace
-from os import getcwd, walk, path
+from argparse import ArgumentParser, Namespace, BooleanOptionalAction
+from os import getcwd, walk, path, listdir
 import sys
 from pathlib import Path
 
@@ -35,13 +35,13 @@ def get_default_extensions() -> list:
         return default_extensions
 
     except FileNotFoundError as exception_message:
-        print(f"There was an error loading langs.toml file: {exception_message}")
+        print(f"Error loading langs.toml file: {exception_message}")
         sys.exit()
 
 
 parser = ArgumentParser(description="LoL.py is used to get the lines of code inside a directory")
 
-# add path and languages arguments
+# add argumentsBooleanOptionalAction
 parser.add_argument("-p", "--path",
                     metavar="path",
                     type=str,
@@ -53,6 +53,22 @@ parser.add_argument("-e", "--extensions",
                     nargs="+", type=str,
                     help="specifies the file extensions that should be searched",
                     default=get_default_extensions())
+
+parser.add_argument("-r", "--recursive",
+                    metavar="recursive",
+                    type=bool,
+                    action=BooleanOptionalAction,
+                    help="states that the file search should not be recursive",
+                    default=True
+                    )
+
+parser.add_argument("-t", "--table",
+                    metavar="table",
+                    type=bool,
+                    action=BooleanOptionalAction,
+                    help="states that the output should be formatted to a (vertical) table",
+                    default=False
+                    )
 
 args: Namespace = parser.parse_args()
 
@@ -66,6 +82,8 @@ class Code:
     def __init__(self) -> None:
         self.path = args.path
         self.extensions = args.extensions
+        self.is_table = args.table
+        self.is_recursive = args.recursive
         self.files = []
         self.num_of_lines = 0
         self.found_extensions = []
@@ -81,11 +99,11 @@ class Code:
                 self.found_extensions.append(extension)
 
         except ValueError as exception_message:
-            print(f"There was an error testing the found extensions: {exception_message}")
+            print(f"Error testing the found extensions: {exception_message}")
 
-    def get_files(self):
+    def get_files_recursive(self):
         """
-        gets all files paths to file with the extensions given
+        stores all file paths to self.files with the extensions given (recusive)
         """
         try:
             for root, _, files in walk(self.path):
@@ -98,8 +116,26 @@ class Code:
                             self.test_found_extensions(extension)
 
         except ValueError as exception_message:
-            print(f"There was an error searching for files: {exception_message}")
+            print(f"Error searching for files: {exception_message}")
             sys.exit()
+
+    def get_files_not_recursive(self):
+        """
+        stores all file paths to self.files with the extensions given (not recusive)
+        """
+        try:
+            self.files = [file for file in listdir(self.path) if path.isfile(file)]
+        except ValueError as exception_message:
+            print(f"Error searching for files: {exception_message}")
+
+    def test_files(self):
+        """
+        this tests wether or not the user wants to get the files recursively
+        """
+        if self.is_recursive:
+            code_obj.get_files_recursive()
+        else:
+            code_obj.get_files_not_recursive()
 
     def count_lines(self):
         """
@@ -114,7 +150,7 @@ class Code:
             self.num_of_lines = count
 
         except TypeError as exception_message:
-            print(f"There was an error coutning the number of lines: {exception_message}")
+            print(f"Error coutning the number of lines: {exception_message}")
             sys.exit()
 
     def get_found_languages(self):
@@ -133,9 +169,9 @@ class Code:
                         break
 
         except FileNotFoundError as exception_message:
-            print(f"There was an error mapping the found extensions to found languages: {exception_message}")
+            print(f"Error mapping the found extensions to found languages: {exception_message}")
 
-    def output(self):
+    def output_v(self):
         """
         prints the attributes to terminal in a formatted way
         """
@@ -143,8 +179,10 @@ class Code:
             output_msg = [
                 [self.path,
                 self.num_of_lines,
-                self.found_languages,
-                self.found_extensions
+                # self.found_languages,
+                "\n".join(self.found_languages),
+                # self.found_extensions
+                "\n".join(self.found_extensions)
                 ]
             ]
 
@@ -156,19 +194,48 @@ class Code:
                         "found languages",
                         "found extensions"
                         ]))
-
         except NameError as exception_message:
-            print(f"There was an error printing the output to the terminal: {exception_message}")
+            print(f"Error printing the output to the terminal: {exception_message}")
             sys.exit()
 
+    def output_h(self):
+        """
+        prints the attributes to terminal in a formatted way
+        """
+        try:
+            output_msg = [
+                ["path", self.path],
+                ["lines of code", self.num_of_lines],
+                ["found languages", self.found_languages],
+                ["found extensions", self.found_extensions]
+            ]
+
+            print(
+                tabulate(
+                output_msg#,
+                ))
+
+        except NameError as exception_message:
+            print(f"Error printing the output to the terminal: {exception_message}")
+            sys.exit()
+
+    def test_output(self):
+        """
+        checks wether the user wants the output to be printed out as a table
+        """
+        if self.is_table:
+            code_obj.output_v()
+        else:
+            code_obj.output_h()
 
 # create Code object
 code_obj = Code()
 
 # get files and lines of code number
-code_obj.get_files()
+code_obj.test_files()
+
 code_obj.count_lines()
 code_obj.get_found_languages()
 
 # output
-code_obj.output()
+code_obj.test_output()
