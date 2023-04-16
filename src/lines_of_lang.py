@@ -58,7 +58,7 @@ parser.add_argument("-r", "--recursive",
                     metavar="recursive",
                     type=bool,
                     action=BooleanOptionalAction,
-                    help="states that the file search should not be recursive",
+                    help="states that the file search is (not) recursive",
                     default=True
                     )
 
