@@ -25,7 +25,7 @@ options:
 #### Default
 The default value of the argmuent ```-e```/```--extensions``` gives you the languages shown inside the [langs.toml](./src/langs.toml). If you don't see your language please add it to the [langs.toml](./src/langs.toml) in order to use the default value of extensions. If you execute the following command path argument will take the current working directory as its value and search for files recursively by deafult:
 ```
-python lines_of_lang.py
+lol
 ```
 This will generate the following output:
 ```
@@ -40,7 +40,7 @@ found extensions  ['.py', '.pyc']
 #### Search inside specific path
 If you want to search inside a folder other than your current working directory then feel free to use the ```-p```/```--path``` argument:
 ```
-python lines_of_lang.py -p C:\repos\TomlForge
+lol -p C:\repos\TomlForge
 ```
 This will produce the following output:
 ```
@@ -55,7 +55,7 @@ found extensions  ['.psm1', '.ps1']
 #### Search for specific extension(s)/languages
 If there is there is a specific file extension you are searching for just use the ```-e```/```--extensions``` argument:
 ```
-python lines_of_lang.py -p C:\repos\TomlForge -e ps1
+lol -p C:\repos\TomlForge -e ps1
 ```
 ```
 ----------------  --------------------
