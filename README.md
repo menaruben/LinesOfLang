@@ -25,7 +25,7 @@ options:
 #### Default
 The default value of the argmuent ```-e```/```--extensions``` gives you the languages shown inside the [langs.toml](./src/langs.toml). If you don't see your language please add it to the [langs.toml](./src/langs.toml) in order to use the default value of extensions. If you execute the following command path argument will take the current working directory as its value and search for files recursively by deafult:
 ```
-lol
+$ lol
 ```
 This will generate the following output:
 ```
@@ -40,7 +40,7 @@ found extensions  ['.py', '.pyc']
 #### Search inside specific path
 If you want to search inside a folder other than your current working directory then feel free to use the ```-p```/```--path``` argument:
 ```
-lol -p C:\repos\TomlForge
+$ lol -p C:\repos\TomlForge
 ```
 This will produce the following output:
 ```
@@ -55,7 +55,7 @@ found extensions  ['.psm1', '.ps1']
 #### Search for specific extension(s)/languages
 If there is there is a specific file extension you are searching for just use the ```-e```/```--extensions``` argument:
 ```
-lol -p C:\repos\TomlForge -e ps1
+$ lol -p C:\repos\TomlForge -e ps1
 ```
 ```
 ----------------  --------------------
@@ -71,7 +71,7 @@ As you can see he language does not get added to the found languages column. I a
 #### Format output to table
 The output by default is a horizontally aligned list. In order to format it to a (vertical) table you need to use the ```-t```/```--table```argument. This is especially useful when you find a lot of languages/extensions. The table makes it more readable.
 ```
-lol -t
+$ lol -t
 ```
 ```
 path                    lines of code  found languages    found extensions
@@ -87,7 +87,7 @@ path                    lines of code  found languages    found extensions
 #### Disable recursive search
 The recursivce search for files is by deafult true. In order to disable this use the ```--no-recursive``` argument.
 ```
-lol --no-recursive
+$ lol --no-recursive
 ```
 ```
 ----------------  ------------------------------
