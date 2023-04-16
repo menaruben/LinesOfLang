@@ -10,7 +10,6 @@ from toml_langs import get_default_extensions
 try:
     from tabulate import tabulate
     from toml import load
-
 except ModuleNotFoundError:
     from subprocess import run, DEVNULL
     run(["pip", "install", "tabulate"], stdout=DEVNULL, stderr=DEVNULL, check=False)
