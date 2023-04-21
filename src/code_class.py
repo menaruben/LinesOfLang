@@ -36,7 +36,7 @@ parser.add_argument("-e", "--extensions",
                     help="specifies the file extensions that should be searched",
                     default=get_default_extensions())
 
-parser.add_argument("-r", "--recursive",
+parser.add_argument("--recursive",
                     metavar="recursive",
                     type=bool,
                     action=BooleanOptionalAction,
@@ -44,7 +44,7 @@ parser.add_argument("-r", "--recursive",
                     default=True
                     )
 
-parser.add_argument("-t", "--table",
+parser.add_argument("--table",
                     metavar="table",
                     type=bool,
                     action=BooleanOptionalAction,
@@ -111,10 +111,8 @@ class Code:
         """
         this tests wether or not the user wants to get the files recursively
         """
-        if args.recursive:
-            self.get_files_recursive()
-        else:
-            self.get_files_not_recursive()
+        if args.recursive: self.get_files_recursive()
+        else: self.get_files_not_recursive()
 
     def count_lines(self):
         """
@@ -191,7 +189,7 @@ class Code:
 
             print(
                 tabulate(
-                output_msg#,
+                output_msg
                 ))
 
         except NameError as exception_message:
@@ -202,7 +200,5 @@ class Code:
         """
         checks wether the user wants the output to be printed out as a table
         """
-        if args.table:
-            self.output_v()
-        else:
-            self.output_h()
+        if args.table: self.output_v()
+        else: self.output_h()
