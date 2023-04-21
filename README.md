@@ -55,7 +55,7 @@ found extensions  ['.psm1', '.ps1']
 #### Search for specific extension(s)/languages
 If there is there is a specific file extension you are searching for just use the ```-e```/```--extensions``` argument:
 ```
-$ lol -p C:\repos\TomlForge -e ps1
+$ lol --path /home/rubi/repos/dev -e rb rs
 ```
 ```
 ----------------  --------------------
